@@ -2,12 +2,14 @@ name: Ooredoo Proxy Scraper & Checker
 
 on:
   schedule:
-    - cron: '*/20 * * * *' # يعمل كل 20 دقيقة
+    - cron: '*/20 * * * *' # يعمل كل 20 دقيقة بشكل آلي
   workflow_dispatch: # زر لتشغيله يدوياً متى شئت
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # ⚠️️ صلاحية الكتابة لتحديث الملف في المستودع تلقائياً
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -24,4 +26,6 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GH_PAT: ${{ secrets.GITHUB_TOKEN }} # استخدام توكن جيت هب المدمج للرفع
         run: python check_and_send.py
