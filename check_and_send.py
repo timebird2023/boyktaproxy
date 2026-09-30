@@ -14,7 +14,7 @@ GH_PAT = os.environ.get("GH_PAT")
 OUTPUT_FILE = "active_proxies.txt"
 
 TEST_URL = "http://httpbin.org/ip" 
-TIMEOUT = 6 
+TIMEOUT = 3 
 MAX_WORKERS = 200
 
 # ============================================
